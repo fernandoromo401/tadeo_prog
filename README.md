@@ -13,4 +13,5 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.**
 
 + Asi que tuve que forzarlo git push origin master --force
 + Si despues me explica buenisimo
+
 __PD: Aguante el Dota__
