@@ -1,0 +1,1 @@
+const dbConfig = require('../db_resources/db.config')
