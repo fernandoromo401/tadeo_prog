@@ -3,18 +3,29 @@ const bodyparser = require('body-parser');
 const cors = require('cors')
 const app = express()
 
+const port = "8080"
+
+let corsOption = {
+    origin: "http://localhost:8080"
+}
+
+app.use(cors(corsOption))
+app.use(bodyparser.json())
+
 
 app.get('/', (req, res) => {
-    res.send(
+    res.status(200).send(
         {
-            response: 'API fincionando en el puerto 3000'
+            response: 'API funcionando en el puerto 8080',
+            status: 200
         }
     )
 })
 
+
 app.get('/version', (req, res) => {
 
-    let apiInfo = {
+    const apiInfo = {
         name: 'api-1',
         version: '1.0',
         author: 'Fernando Romo',
@@ -34,6 +45,6 @@ app.post('/', (req, res) => {
     )
 })
 
-app.listen('3000', () => {
-    console.log('Puerto 3000')
+app.listen(port, () => {
+    console.log('Puerto ', port)
 })
