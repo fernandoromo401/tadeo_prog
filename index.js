@@ -11,7 +11,9 @@ let corsOption = {
 
 app.use(cors(corsOption))
 app.use(bodyparser.json())
-
+app.listen(port, () => {
+    console.log('Puerto ', port)
+})
 
 app.get('/', (req, res) => {
     res.status(200).send(
@@ -35,6 +37,17 @@ app.get('/version', (req, res) => {
     res.status(200).send(apiInfo)
 })
 
+app.get('/profesor', (req, res) => {
+
+    const apiInfo = {
+        name: 'Tadeo',
+        lastName: 'Riveros',
+        mail: 'prof.tadeoriveros@iesmb.edu.ar'
+    }
+
+    res.status(200).send(apiInfo)
+})
+
 app.post('/', (req, res) => {
 
     res.status(200).send(
@@ -45,6 +58,3 @@ app.post('/', (req, res) => {
     )
 })
 
-app.listen(port, () => {
-    console.log('Puerto ', port)
-})
