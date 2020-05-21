@@ -2,7 +2,8 @@ const db = require("../models/index");
 const Subject = db.Subject;
 //Mirar para que es
 const Op = db.Sequelize.Op;
-
+const errorHandler = require("../helpers/function");
+//Guarda una materia
 exports.create = (req, res) => {
   // Llego una peticion
   if (!req.body.title || !req.body.cohort) {
@@ -23,9 +24,7 @@ exports.create = (req, res) => {
       res.status(200).send(data);
     })
     .catch((err) => {
-      res.status(500).send({
-        message: err.message || "Error the service",
-      });
+      errorHandler(res, "Error create", 500);
     });
 };
 
@@ -38,8 +37,58 @@ exports.findAll = (req, res) => {
       res.send(data);
     })
     .catch((err) => {
-      res.status(500).send({
-        message: err.message || "Error the service",
-      });
+      errorHandler(res, "Error find all", 500);
+    });
+};
+
+exports.findOne = (req, res) => {
+  const id = req.params.id;
+
+  Subject.findByPk(id)
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      errorHandler(res, "Error find one", 500);
+    });
+};
+
+exports.update = (req, res) => {
+  const id = req.params.id;
+
+  Subject.update(req.body, { where: { id: id } })
+    .then((num) => {
+      if (num === 1) {
+        res.send({
+          message: "Subject was updated successfully",
+        });
+      } else {
+        res.status(404).send({
+          mensage: "Cannot update Subject with ID " + id,
+        });
+      }
+    })
+    .catch((err) => {
+      errorHandler(res, "Error update", 500);
+    });
+};
+
+exports.delete = (req, res) => {
+  const id = req.params.id;
+
+  Subject.destroy(req.body, { where: { id: id } })
+    .then((num) => {
+      if (num === 1) {
+        res.send({
+          message: "Subject was delete successfully",
+        });
+      } else {
+        res.status(404).send({
+          mensage: "Cannot delete Subject with ID " + id,
+        });
+      }
+    })
+    .catch((err) => {
+      errorHandler(res, "Error update", 500);
     });
 };
