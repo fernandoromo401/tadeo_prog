@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
   controller.findAll(req, res);
 });
 
-app.get("/api/subject", (req, res) => {
+app.get("/api/subject/:title", (req, res) => {
   controller.findAll(req, res);
 });
 

@@ -6,6 +6,7 @@ module.exports = (app) => {
   router.get(URL_SUBJECT, subjectController.findAll);
   router.post(URL_SUBJECT, subjectController.create);
   router.get(URL_SUBJECT + ":id", subjectController.findOne);
+  router.delete(URL_SUBJECT + ":id", subjectController.delete);
 
   app.use("/api" + URL_SUBJECT, router);
 };

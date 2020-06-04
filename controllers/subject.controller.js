@@ -6,7 +6,7 @@ const errorHandler = require("../helpers/function");
 //Guarda una materia
 exports.create = (req, res) => {
   // Llego una peticion
-  if (!req.body.title || !req.body.cohort) {
+  if (!req.body.title || !req.body.career) {
     res.status(400).send({
       message: "Title cannot be empty",
     });
@@ -16,6 +16,7 @@ exports.create = (req, res) => {
   const subject = {
     title: req.body.title,
     description: req.body.description,
+    career: req.body.career,
   };
 
   //Se intenta crear una materia
@@ -30,8 +31,8 @@ exports.create = (req, res) => {
 
 //Busca las materias
 exports.findAll = (req, res) => {
-  const title = req.query.title;
-  const condition = title ? { title: { [Op.like]: `%${title}$` } } : null;
+  const title = req.params.title;
+  const condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
   Subject.findAll({ where: condition })
     .then((data) => {
       res.send(data);
@@ -77,7 +78,7 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
   const id = req.params.id;
   console.log(id);
-  Subject.destroy(req.body, { where: { id: id } })
+  Subject.destroy({ where: { id: id } })
     .then((num) => {
       if (num === 1) {
         res.send({
