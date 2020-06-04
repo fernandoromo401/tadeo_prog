@@ -25,6 +25,8 @@ const db = {
     Sequalize: Sequalize
 };
 */
+const db = {};
+
 db.Sequelize = Sequelize;
 db.sequelizeInstanceDB = sequelizeInstanceDB;
 

@@ -39,6 +39,7 @@ exports.findAll = (req, res) => {
     .catch((err) => {
       errorHandler(res, "Error find all", 500);
     });
+  console.log("req.headers");
 };
 
 exports.findOne = (req, res) => {
@@ -75,7 +76,7 @@ exports.update = (req, res) => {
 
 exports.delete = (req, res) => {
   const id = req.params.id;
-
+  console.log(id);
   Subject.destroy(req.body, { where: { id: id } })
     .then((num) => {
       if (num === 1) {
