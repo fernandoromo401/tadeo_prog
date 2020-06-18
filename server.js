@@ -19,7 +19,7 @@ const db = require("./models/index");
 db.sequelizeInstanceDB.sync();
 
 const controller = require("./controllers/subject.controller");
-app.get("/", (req, res) => {
+app.get("/api/subject/", (req, res) => {
   controller.findAll(req, res);
 });
 

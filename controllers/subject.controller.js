@@ -77,7 +77,7 @@ exports.update = (req, res) => {
 
 exports.delete = (req, res) => {
   const id = req.params.id;
-  console.log(id);
+
   Subject.destroy({ where: { id: id } })
     .then((num) => {
       if (num === 1) {
